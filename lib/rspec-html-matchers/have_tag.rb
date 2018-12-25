@@ -75,9 +75,12 @@ module RSpecHtmlMatchers
         when String
           @parent_scope = Nokogiri::HTML(document)
           @document     = document
-        else
+        when self.class
           @parent_scope  = document.current_scope
           @document      = @parent_scope.to_html
+        else
+          @parent_scope = @current_scope = document.search(@tag)
+          @document = document
       end
       @current_scope = begin
         @parent_scope.css(@tag)

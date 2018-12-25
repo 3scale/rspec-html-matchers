@@ -681,4 +681,9 @@ describe 'have_tag' do
     end
   end
 
+  context "xml document" do
+    subject(:xml) { Nokogiri::XML('<root><node/></root>') }
+    it('should match root') { is_expected.to have_tag('root') }
+    it('should match node') { expect(xml.root).to have_tag('node') }
+  end
 end
